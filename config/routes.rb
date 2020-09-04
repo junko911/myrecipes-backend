@@ -1,6 +1,16 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
+      resources :cuisines
+    end
+  end
+  namespace :api do
+    namespace :v1 do
+      resources :comments
+    end
+  end
+  namespace :api do
+    namespace :v1 do
       resources :ingredient_recipes
     end
   end
