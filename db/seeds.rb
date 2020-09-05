@@ -7,6 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'rest-client'
 
+API_KEY = 'fd16995de3f7470ebd088405c7348ac0'
 cuisines = [
   'african',
   'american',
@@ -36,13 +37,31 @@ cuisines = [
   'vietnamese'
 ]
 
-API_KEY = 'fd16995de3f7470ebd088405c7348ac0'
-cuisine_url = "https://api.spoonacular.com/recipes/complexSearch?#{cuisine}=italian&apiKey=#{API_KEY}"
-information_url = "https://api.spoonacular.com/recipes/#{id}/information?apiKey=#{API_KEY}"
-ingredients_url = "https://api.spoonacular.com/recipes/#{id}/ingredientWidget.json?apiKey=#{API_KEY}"
-response = RestClient.get(API_URL)
-byebug
-data = JSON.parse(response)
+cuisines.each do |cuisine|
+  new_cuisine = Cuisine.create!(name: cuisine)
+  cuisine_url = "https://api.spoonacular.com/recipes/complexSearch?cuisine=#{cuisine}&apiKey=#{API_KEY}"
+  cuisine_response = RestClient.get(cuisine_url)
+  cuisine_data = JSON.parse(cuisine_response)["results"]
+  
+  cuisine_data.each do |recipe|
+    information_url = "https://api.spoonacular.com/recipes/#{recipe["id"]}/information?apiKey=#{API_KEY}"
+    information_response = RestClient.get(information_url)
+    recipe_content_data = JSON.parse(information_response)["instructions"]
+    new_recipe = Recipe.create!(title: recipe["title"], image: recipe["image"], content: recipe_content_data, likes: 0, cuisine_id: new_cuisine.id)
+  end
+  puts "Cuisine #{cuisine} and 10 recipes created"
+end
+# ingredients_url = "https://api.spoonacular.com/recipes/716426/ingredientWidget.json?apiKey=#{API_KEY}"
+# ingredients_response = RestClient.get(ingredients_url)
+# ingredients_data = JSON.parse(ingredients_response)["ingredients"]
+# end
+# ingredients_data.each_with_object([]) do |e, array| array << {e["name"] => e["amount"]["us"]} end
+#   puts JSON.parse(recipe_info)
+# end
+
+# byebug
+# 'something'
+
 
 
 # animals_response = RestClient.get("http://localhost:3000/animals")
