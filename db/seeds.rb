@@ -7,7 +7,12 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'rest-client'
 
-API_KEY = 'fd16995de3f7470ebd088405c7348ac0'
+# Cuisine.destroy_all
+# Recipe.destroy_all
+# IngredientRecipe.destroy_all
+# Ingredient.destroy_all
+
+API_KEY = ""
 cuisines = [
   'african',
   'american',
@@ -22,56 +27,51 @@ cuisines = [
   'greek',
   'indian',
   'irish',
-  'italian',
-  'japanese',
-  'jewish',
-  'korean',
-  'latin-american',
-  'mediterranean',
-  'mexican',
-  'middle-eastern',
-  'nordic',
-  'southern',
-  'spanish',
-  'thai',
-  'vietnamese'
+  # 'italian',
+  # 'japanese',
+  # 'jewish',
+  # 'korean',
+  # 'latin-american',
+  # 'mediterranean',
+  # 'mexican',
+  # 'middle-eastern',
+  # 'nordic',
+  # 'southern',
+  # 'spanish',
+  # 'thai',
+  # 'vietnamese'
 ]
 
-cuisines.each do |cuisine|
-  new_cuisine = Cuisine.create!(name: cuisine)
-  cuisine_url = "https://api.spoonacular.com/recipes/complexSearch?cuisine=#{cuisine}&apiKey=#{API_KEY}"
+cuisines.each do |cuisine_row|
+  cuisine = Cuisine.create!(name: cuisine_row)
+  cuisine_url = "https://api.spoonacular.com/recipes/complexSearch?cuisine=#{cuisine_row}&apiKey=#{API_KEY}"
   cuisine_response = RestClient.get(cuisine_url)
   cuisine_data = JSON.parse(cuisine_response)["results"]
   
-  cuisine_data.each do |recipe|
-    information_url = "https://api.spoonacular.com/recipes/#{recipe["id"]}/information?apiKey=#{API_KEY}"
+  cuisine_data.each do |recipe_row|
+    # get recipe content
+    information_url = "https://api.spoonacular.com/recipes/#{recipe_row['id']}/information?apiKey=#{API_KEY}"
     information_response = RestClient.get(information_url)
     recipe_content_data = JSON.parse(information_response)["instructions"]
-    new_recipe = Recipe.create!(title: recipe["title"], image: recipe["image"], content: recipe_content_data, likes: 0, cuisine_id: new_cuisine.id)
+    
+    recipe = Recipe.find_or_create_by(id: recipe_row['id'])
+    
+    recipe.title = recipe_row["title"]
+    recipe.image = recipe_row["image"]
+    recipe.content = recipe_content_data
+    recipe.likes = 0
+    recipe.cuisine = cuisine
+    recipe.save
+
+    # get ingredient to create Ingredient and IngredientRecipe
+    ingredients_url = "https://api.spoonacular.com/recipes/#{recipe_row['id']}/ingredientWidget.json?apiKey=#{API_KEY}"
+    ingredients_response = RestClient.get(ingredients_url)
+    ingredients_data = JSON.parse(ingredients_response)["ingredients"]
+    ingredients_data.each do |ingredient_row|
+      ingredient = Ingredient.find_or_create_by(name: ingredient_row["name"])
+      amount = "#{ingredient_row['amount']['us']['value']} #{ingredient_row['amount']['us']['unit']}"
+      IngredientRecipe.create(recipe_id: recipe.id, ingredient_id: ingredient.id, amount: amount)
+    end
   end
-  puts "Cuisine #{cuisine} and 10 recipes created"
+  puts "Cuisine #{cuisine_row} and #{Cuisine.find_by(name: cuisine_row).recipes.count} recipes created"
 end
-# ingredients_url = "https://api.spoonacular.com/recipes/716426/ingredientWidget.json?apiKey=#{API_KEY}"
-# ingredients_response = RestClient.get(ingredients_url)
-# ingredients_data = JSON.parse(ingredients_response)["ingredients"]
-# end
-# ingredients_data.each_with_object([]) do |e, array| array << {e["name"] => e["amount"]["us"]} end
-#   puts JSON.parse(recipe_info)
-# end
-
-# byebug
-# 'something'
-
-
-
-# animals_response = RestClient.get("http://localhost:3000/animals")
-# animals_data = JSON.parse(animals_response)
-
-# users_data.each do |user_hash|
-#     User.create(user_hash)
-# end
-
-# animals_data.each do |animal_hash|
-#     Animal.create(animal_hash)
-# end
-
