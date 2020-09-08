@@ -14,11 +14,8 @@ require 'rest-client'
 
 API_KEY = ""
 cuisines = [
-  'african',
   'american',
   'british',
-  'cajun',
-  'caribbean',
   'chinese',
   'eastern-european',
   'european',
@@ -27,20 +24,18 @@ cuisines = [
   'greek',
   'indian',
   'irish',
-  # 'italian',
-  # 'japanese',
-  # 'jewish',
-  # 'korean',
-  # 'latin-american',
-  # 'mediterranean',
-  # 'mexican',
-  # 'middle-eastern',
-  # 'nordic',
-  # 'southern',
-  # 'spanish',
-  # 'thai',
-  # 'vietnamese'
+  'italian',
+  'japanese',
+  'korean',
+  'latin-american',
+  'mediterranean',
+  'mexican',
+  'middle-eastern',
+  'southern',
+  'spanish',
+  'thai'
 ]
+
 
 cuisines.each do |cuisine_row|
   cuisine = Cuisine.create!(name: cuisine_row)
