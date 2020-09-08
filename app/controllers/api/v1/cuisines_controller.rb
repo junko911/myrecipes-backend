@@ -5,8 +5,9 @@ class Api::V1::CuisinesController < ApplicationController
   end
   
   def show
-    recipes = Cuisine.find_by(name: params[:id]).recipes
-    render json: recipes
+    recipe_ids = Ingredient.where('name LIKE ?', "%#{params[:ingredient]}%").map(&:recipe_ids).flatten if params[:ingredient].present?
+    recipes = Cuisine.find_by(name: params[:id]).recipes 
+    recipes = recipes.where(id: recipe_ids) if recipe_ids.present?
+    render json: recipes.to_json(include: :ingredients)
   end
-
 end
