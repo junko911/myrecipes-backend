@@ -23,17 +23,17 @@ cuisines = [
   'german',
   'greek',
   'indian',
-  'irish',
-  'italian',
-  'japanese',
-  'korean',
-  'latin-american',
-  'mediterranean',
-  'mexican',
-  'middle-eastern',
-  'southern',
-  'spanish',
-  'thai'
+  'irish'
+#   'italian',
+#   'japanese',
+#   'korean',
+#   'latin-american',
+#   'mediterranean',
+#   'mexican',
+#   'middle-eastern',
+#   'southern',
+#   'spanish',
+#   'thai'
 ]
 
 
