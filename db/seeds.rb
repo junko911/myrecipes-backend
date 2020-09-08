@@ -12,33 +12,32 @@ require 'rest-client'
 # IngredientRecipe.destroy_all
 # Ingredient.destroy_all
 
-API_KEY = ""
+API_KEY = "44e3c00c6a88414188bc637a0ce19835"
 cuisines = [
-  'american',
-  'british',
-  'chinese',
-  'eastern-european',
-  'european',
-  'french',
-  'german',
-  'greek',
-  'indian',
-  'irish',
-  'italian',
-  'japanese',
-  'korean',
-  'latin-american',
-  'mediterranean',
-  'mexican',
-  'middle-eastern',
-  'southern',
-  'spanish',
-  'thai'
+  # 'american', #0
+  # 'british',
+  # 'chinese', 
+  # 'eastern-european', #0
+  # 'european', #1
+  # 'french', #9
+  # 'german',
+  # 'greek',
+  # 'indian',
+  # 'irish', #9
+  # 'italian', #1
+  # 'japanese',
+  # 'korean',
+  # 'latin-american',
+  # 'mediterranean',
+  # 'mexican',
+  # 'middle%20eastern',
+  # 'southern',
+  # 'spanish',
+  # 'thai'
 ]
 
-
 cuisines.each do |cuisine_row|
-  cuisine = Cuisine.create!(name: cuisine_row)
+  cuisine = Cuisine.find_or_create_by!(name: cuisine_row)
   cuisine_url = "https://api.spoonacular.com/recipes/complexSearch?cuisine=#{cuisine_row}&apiKey=#{API_KEY}"
   cuisine_response = RestClient.get(cuisine_url)
   cuisine_data = JSON.parse(cuisine_response)["results"]
@@ -69,4 +68,12 @@ cuisines.each do |cuisine_row|
     end
   end
   puts "Cuisine #{cuisine_row} and #{Cuisine.find_by(name: cuisine_row).recipes.count} recipes created"
+end
+
+# Rename Middle Eastern cuisine
+me = Cuisine.find_by(name: 'middle%20eastern')
+
+if me
+  me.name = 'middle-eastern'
+  me.save
 end
