@@ -20,7 +20,7 @@ class Ingredient < ApplicationRecord
     end
     
     def nut_free?
-        nuts = ['nut', 'almond', 'peacan', 'pistachio']
+        nuts = ['nut', 'almond', 'pecan', 'pistachio']
         nuts.each do |nut|
             return false if name.include?(nut) 
         end
