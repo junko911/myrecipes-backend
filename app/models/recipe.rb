@@ -24,4 +24,11 @@ class Recipe < ApplicationRecord
         end
         true
     end
+
+    def shellfish_free?
+        ingredients.each do |ingredient|
+            return false if !ingredient.shellfish_free?
+        end
+        true
+    end
 end

@@ -26,4 +26,12 @@ class Ingredient < ApplicationRecord
         end
         true
     end
+
+    def shellfish_free?
+        shellfish_ingredients = ['shrimp', 'crab', 'lobster', 'squid', 'oyster', 'scallops', 'mussels']
+        shellfish_ingredients.each do |shellfish|
+            return false if name.include?(shellfish) 
+        end
+        true
+    end
 end
