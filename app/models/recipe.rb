@@ -31,4 +31,11 @@ class Recipe < ApplicationRecord
         end
         true
     end
+
+    def wheat_free?
+        ingredients.each do |ingredient|
+            return false if !ingredient.wheat_free?
+        end
+        true
+    end
 end

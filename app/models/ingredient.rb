@@ -34,4 +34,15 @@ class Ingredient < ApplicationRecord
         end
         true
     end
+
+    
+    def wheat_free?
+        wheat_products = ['flour', 'bread', 'cereal', 'pasta', 'spagetti', 'couscous', 'cracker', 'crouton', 'starch', 'wheat', 'bun', 'cake']
+        wheat_products.each do |product|
+            return false if name.include?(product) 
+        end
+        true
+    end
+
+    
 end
