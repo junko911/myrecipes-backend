@@ -9,12 +9,20 @@ class Ingredient < ApplicationRecord
         end
         true
     end
-
+    
     def egg_free?
         if name.include?('eggplant')
             return true
         elsif name.include?('egg')
             return false
+        end
+        true
+    end
+    
+    def nut_free?
+        nuts = ['nut', 'almond', 'peacan', 'pistachio']
+        nuts.each do |nut|
+            return false if name.include?(nut) 
         end
         true
     end

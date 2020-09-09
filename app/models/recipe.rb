@@ -17,4 +17,11 @@ class Recipe < ApplicationRecord
         end
         true
     end
+    
+    def nut_free?
+        ingredients.each do |ingredient|
+            return false if !ingredient.nut_free?
+        end
+        true
+    end
 end

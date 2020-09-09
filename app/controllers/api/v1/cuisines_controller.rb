@@ -10,6 +10,7 @@ class Api::V1::CuisinesController < ApplicationController
     recipes = recipes.where(id: recipe_ids) if recipe_ids.present?
     recipes = recipes.select(&:dairy_free?) if params[:dairy_free].present?
     recipes = recipes.select(&:egg_free?) if params[:egg_free].present?
+    recipes = recipes.select(&:nut_free?) if params[:nut_free].present?
     render json: recipes.to_json(include: :ingredients)
   end
 end
