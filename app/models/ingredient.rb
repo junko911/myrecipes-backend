@@ -28,7 +28,7 @@ class Ingredient < ApplicationRecord
     end
 
     def shellfish_free?
-        shellfish_ingredients = ['shrimp', 'crab', 'lobster', 'squid', 'oyster', 'scallops', 'mussels']
+        shellfish_ingredients = ['shrimp', 'crab', 'lobster', 'squid', 'oyster', 'scallops', 'mussels', 'prawn']
         shellfish_ingredients.each do |shellfish|
             return false if name.include?(shellfish) 
         end
@@ -37,8 +37,16 @@ class Ingredient < ApplicationRecord
 
     
     def wheat_free?
-        wheat_products = ['flour', 'bread', 'cereal', 'pasta', 'spagetti', 'couscous', 'cracker', 'crouton', 'starch', 'wheat', 'bun', 'cake']
+        wheat_products = ['flour', 'bread', 'cereal', 'pasta', 'spagetti', 'couscous', 'cracker', 'crouton', 'starch', 'wheat', 'bun', 'cake', 'pastry', 'dough']
         wheat_products.each do |product|
+            return false if name.include?(product) 
+        end
+        true
+    end
+    
+    def soy_free?
+        soy_products = ['soy', 'tofu', 'miso', 'natto', 'shoyu', 'edamame', 'vegetable oil', 'teriyaki']
+        soy_products.each do |product|
             return false if name.include?(product) 
         end
         true

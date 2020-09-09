@@ -13,6 +13,7 @@ class Api::V1::CuisinesController < ApplicationController
     recipes = recipes.select(&:nut_free?) if params[:nut_free].present?
     recipes = recipes.select(&:shellfish_free?) if params[:shellfish_free].present?
     recipes = recipes.select(&:wheat_free?) if params[:wheat_free].present?
+    recipes = recipes.select(&:soy_free?) if params[:soy_free].present?
     render json: recipes.to_json(include: :ingredients)
   end
 end

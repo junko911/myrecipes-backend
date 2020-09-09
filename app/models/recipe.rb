@@ -38,4 +38,13 @@ class Recipe < ApplicationRecord
         end
         true
     end
+
+    def soy_free?
+        ingredients.each do |ingredient|
+            return false if !ingredient.soy_free?
+        end
+        true
+    end
+
+
 end
