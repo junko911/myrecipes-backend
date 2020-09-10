@@ -5,7 +5,6 @@ class Api::V1::RecipesController < ApplicationController
       end
       def update
         recipe = Recipe.find(params[:id])
-        byebug
         recipe.update(recipe_params)
         render json: recipe
       end
