@@ -5,15 +5,15 @@ class Ingredient < ApplicationRecord
     def dairy_free?
         dairy_products = ['milk', 'yogurt', 'cream', 'butter', 'cheese', 'casein', 'custard', 'ice cream', 'feta']
         dairy_products.each do |dairy|
-            return false if name.include?(dairy) 
+            return false if name.downcase.include?(dairy) 
         end
         true
     end
     
     def egg_free?
-        if name.include?('eggplant')
+        if name.downcase.include?('eggplant')
             return true
-        elsif name.include?('egg')
+        elsif name.downcase.include?('egg')
             return false
         end
         true
@@ -22,7 +22,7 @@ class Ingredient < ApplicationRecord
     def nut_free?
         nuts = ['nut', 'almond', 'pecan', 'pistachio']
         nuts.each do |nut|
-            return false if name.include?(nut) 
+            return false if name.downcase.include?(nut) 
         end
         true
     end
@@ -30,7 +30,7 @@ class Ingredient < ApplicationRecord
     def shellfish_free?
         shellfish_ingredients = ['shrimp', 'crab', 'lobster', 'squid', 'oyster', 'scallops', 'mussels', 'prawn']
         shellfish_ingredients.each do |shellfish|
-            return false if name.include?(shellfish) 
+            return false if name.downcase.include?(shellfish) 
         end
         true
     end
@@ -39,7 +39,7 @@ class Ingredient < ApplicationRecord
     def wheat_free?
         wheat_products = ['flour', 'bread', 'cereal', 'pasta', 'spagetti', 'couscous', 'cracker', 'crouton', 'starch', 'wheat', 'bun', 'cake', 'pastry', 'dough']
         wheat_products.each do |product|
-            return false if name.include?(product) 
+            return false if name.downcase.include?(product) 
         end
         true
     end
@@ -47,7 +47,7 @@ class Ingredient < ApplicationRecord
     def soy_free?
         soy_products = ['soy', 'tofu', 'miso', 'natto', 'shoyu', 'edamame', 'vegetable oil', 'teriyaki']
         soy_products.each do |product|
-            return false if name.include?(product) 
+            return false if name.downcase.include?(product) 
         end
         true
     end
