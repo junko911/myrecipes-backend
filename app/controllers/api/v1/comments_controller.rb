@@ -5,22 +5,25 @@ class Api::V1::CommentsController < ApplicationController
       end
       
       def show
-        commment = Comment.find(params:[id])
+        commment = Comment.find(params[:id])
         render json: comment
       end
 
       def new
           comment = Comment.new
+          render json: comment
       end
 
       def create
-        comment = Comment.create(comments_params)
+        comment = Comment.create!(comments_params)
+        render json: comment
       end 
+
 
       private
     
       def comments_params
-        params.require(:comments).permit(:recipe_id, :user, :content)
+        params.require(:comment).permit(:recipe_id, :user, :content)
       end 
 
 end
