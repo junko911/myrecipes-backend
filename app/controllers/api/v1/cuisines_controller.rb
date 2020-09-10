@@ -19,8 +19,8 @@ class Api::V1::CuisinesController < ApplicationController
 
   def update
     cuisine = Cuisine.find_by(name: params[:id])
-    cuisine.update(cuisine_params)
-    render json: cuisine
+    cuisine.update(cuisines_params)
+    render json: recipes.to_json(include: [:ingredients, :likes])
   end
 
   private
