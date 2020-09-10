@@ -5,7 +5,7 @@ class Api::V1::CommentsController < ApplicationController
       end
       
       def show
-        commment = Comment.find(params[:id])
+        comment = Comment.find(params[:id])
         render json: comment
       end
 
@@ -17,8 +17,7 @@ class Api::V1::CommentsController < ApplicationController
       def create
         comment = Comment.create!(comments_params)
         render json: comment
-      end 
-
+      end
 
       private
     
