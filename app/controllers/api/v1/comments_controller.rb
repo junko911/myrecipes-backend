@@ -9,4 +9,18 @@ class Api::V1::CommentsController < ApplicationController
         render json: comment
       end
 
+      def new
+          comment = Comment.new
+      end
+
+      def create
+        comment = Comment.create(comments_params)
+      end 
+
+      private
+    
+      def comments_params
+        params.require(:comments).permit(:recipe_id, :user, :content)
+      end 
+
 end
