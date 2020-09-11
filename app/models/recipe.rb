@@ -46,5 +46,20 @@ class Recipe < ApplicationRecord
         true
     end
 
-
+    def as_json(_options = nil)
+       {
+            id: id,
+            title: title,
+            content: content,
+            likes: likes,
+            image: image,
+            comments: comments,
+            ingredients: ingredient_recipes.map { |ingredient_recipe| 
+                {
+                    name: ingredient_recipe.ingredient.name,
+                    amount: ingredient_recipe.amount
+                }
+            }
+       }
+    end
 end

@@ -12,7 +12,7 @@ require 'rest-client'
 # IngredientRecipe.destroy_all
 # Ingredient.destroy_all
 
-API_KEY = "e5c856863009411e82249944963be444"
+API_KEY = ""
 cuisines = [
   # 'american', #0
   # 'british',
