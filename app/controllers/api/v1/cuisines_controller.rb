@@ -16,4 +16,17 @@ class Api::V1::CuisinesController < ApplicationController
     recipes = recipes.select(&:soy_free?) if params[:soy_free].present?
     render json: recipes
   end
+
+  def update
+    cuisine = Cuisine.find_by(name: params[:id])
+    cuisine.update(cuisines_params)
+    render json: recipes.to_json(include: [:ingredients, :likes])
+  end
+
+  private
+    
+      def cuisines_params
+        params.require(:cuisine).permit(:name, :likes)
+      end 
+  
 end
