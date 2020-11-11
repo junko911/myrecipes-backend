@@ -2,24 +2,21 @@
 ![screenshot](./screenshot.png)
 
 ## About
-Email newsletter tool built with React and Ruby on Rails.
+A single page website built with Javascript and Ruby on Rails.
 
 Key features:
 
-* send email campaigns.
-* track the stats of the campaigns (open rate, click rate, unsubscribe, spam report, etc.)
-* import contacts from spreadsheets
-* manage and categorize contacts
+Users can...
+* search recipes by cuisines, and ingredients from 500+ recipes of 16 cuisines
+* filter out recipes that contain allergic ingredients from the result
 
 ## Demo
 
-[Video](https://www.youtube.com/watch?v=lAlcbW7LLvw&feature=youtu.be)
+[Link](https://mod3-myrecipes.herokuapp.com/)
 
 ## Technologies and stack
 
-* Frontend: React, React Redux, Reactstrap
+* Frontend: JavaScript, Bootstrap
 * Backend: Ruby/Ruby on Rails
 * Database: Postgresql
-* Email Sender: SendGrid
-* Template Editor: CKEditor
-* Data visualization: amCharts
+* External API: Spoonacular API(https://spoonacular.com/food-api)
