@@ -1,24 +1,25 @@
-# README
+# MyRecipes 🍽
+![screenshot](./screenshot.png)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## About
+Email newsletter tool built with React and Ruby on Rails.
 
-Things you may want to cover:
+Key features:
 
-* Ruby version
+* send email campaigns.
+* track the stats of the campaigns (open rate, click rate, unsubscribe, spam report, etc.)
+* import contacts from spreadsheets
+* manage and categorize contacts
 
-* System dependenciesgit 
+## Demo
 
-* Configuration
+[Video](https://www.youtube.com/watch?v=lAlcbW7LLvw&feature=youtu.be)
 
-* Database creation
+## Technologies and stack
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Frontend: React, React Redux, Reactstrap
+* Backend: Ruby/Ruby on Rails
+* Database: Postgresql
+* Email Sender: SendGrid
+* Template Editor: CKEditor
+* Data visualization: amCharts
