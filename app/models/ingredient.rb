@@ -52,5 +52,4 @@ class Ingredient < ApplicationRecord
         true
     end
 
-    
 end
